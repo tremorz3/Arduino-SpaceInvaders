@@ -21,13 +21,13 @@ int points = 0;
 char pts[5];
 char gameover[9];
 
-const int pinBuzzer = 8;  // Imposta il pin del buzzer
+const int pinBuzzer = 8;  //pin del buzzer
 
-const int frequenzaSparo = 1000;  // Frequenza del suono dello sparo in Hertz
-const int durataSparo = 100;  // Durata del suono dello sparo in millisecondi
+const int frequenzaSparo = 1000;  //frequenza del suono dello sparo
+const int durataSparo = 100;  //durata del suono dello sparo
 
-const int frequenzaEsplosione = 250;  // Frequenza del suono dell'esplosione in Hertz
-const int durataEsplosione = 50;  // Durata del suono dell'esplosione in millisecondi
+const int frequenzaEsplosione = 250;  //frequenza del suono dell'esplosione
+const int durataEsplosione = 50;  //durata del suono dell'esplosione
 
 bool REVERSE = false;
 
@@ -139,20 +139,17 @@ void loop(){
 }
 
 void riproduciSparo() {
-  // Utilizza la funzione tone() per generare il suono
-  tone(pinBuzzer, frequenzaSparo, durataSparo);
+  tone(pinBuzzer, frequenzaSparo, durataSparo);  //genera il suono
 
-  // Attendi la durata del suono prima di interromperlo
   int t = millis();
-  if(millis() - t >= durataSparo)
-    noTone(pinBuzzer); // Interrompi il suono
+  if(millis() - t >= durataSparo) //tempo di durata del suono
+    noTone(pinBuzzer); //interrompe il suono
 }
 
 void riproduciEsplosione() {
-  // Utilizza la funzione tone() per generare il suono
   tone(pinBuzzer, frequenzaEsplosione, durataEsplosione);
 
   int t = millis();
   if(millis() - t >= durataEsplosione)
-    noTone(pinBuzzer); // Interrompi il suono
+    noTone(pinBuzzer);
 }
