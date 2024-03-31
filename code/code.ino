@@ -21,6 +21,7 @@ int points = 0;
 char pts[5];
 char gameover[9];
 
+const int pinButton = 6;  //pin bottone
 const int pinBuzzer = 8;  //pin del buzzer
 
 const int frequenzaSparo = 1000;  //frequenza del suono dello sparo
@@ -35,7 +36,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE, /* 
 
 void setup(){
   pinMode(pinBuzzer, OUTPUT);
-  pinMode(6,INPUT);
+  pinMode(pinButton,INPUT);
   Serial.begin(9600);
 
   u8g2.begin();
@@ -44,11 +45,11 @@ void setup(){
 }
 
 void loop(){
-  int statoPulsante = digitalRead(6);
+  int statoPulsante = digitalRead(pinButton);
 
   u8g2.clearBuffer();
 
-  int valoreX = analogRead(A0);
+  int valoreX = analogRead(A0);  //A0 == trimmer
   xship = map(valoreX,0,1024,5,123);
 
   //sparo
@@ -89,14 +90,14 @@ void loop(){
       }
 
       if(!COLLISION && xalien >= 120){
-        REVERSE = true;
+        REVERSE = true;                 //REVERSE non fa uscire fuori dai bordi l'alieno
       }
 
       if(!COLLISION && xalien < 5){
         REVERSE = false;
       }
 
-      if(random(3) == 1){yalien += 1;}
+      if(random(3) == 1){yalien += 1;} //discesa randomica
     }
 
     //gameover
